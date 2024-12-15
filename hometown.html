@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的家乡——平遥古城</title>
+  <script src="https://webapi.amap.com/maps?v=2.0&key=4a7abe253defa19839f4d25763f6a065"></script>
+  <!-- 引入字体图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* 页面整体样式 */
+    body {
+      font-family: 'Microsoft YaHei', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    /* 修改头部样式为黑色调 */
+    header {
+      background: linear-gradient(135deg, #1a1a1a, #333);
+      color: white;
+      padding: 2rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* 移除导航栏相关样式 */
+    nav {
+      display: none;
+    }
+
+    /* 主要内容区域 */
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      padding: 0 2rem;
+    }
+
+    .content-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .content-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-image {
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .content-card:hover .card-image img {
+      transform: scale(1.1);
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .card-content h2 {
+      margin: 0 0 1rem 0;
+      color: #2c3e50;
+      font-size: 1.5em;
+    }
+
+    .card-content p {
+      margin: 0;
+      line-height: 1.6;
+      color: #666;
+    }
+
+    /* 地图区域样式 */
+    .map-section {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+
+    .map-section h2 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 1.5rem;
+    }
+
+    .map-buttons {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    /* 修改按钮样式为黑色调 */
+    .map-button {
+      padding: 0.8rem 1.5rem;
+      margin: 0 0.5rem;
+      background: linear-gradient(135deg, #1a1a1a, #333);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+
+    .map-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .map-container {
+      height: 500px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    /* 修改页脚样式为黑色调 */
+    footer {
+      background: linear-gradient(135deg, #1a1a1a, #333);
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 3rem;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+
+      nav ul {
+        flex-direction: column;
+      }
+
+      nav ul ul {
+        position: static;
+        width: 100%;
+      }
+    }
+
+    /* 修改返回按钮样式为黑色调 */
+    .back-to-home {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: linear-gradient(135deg, #1a1a1a, #333);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .back-to-home:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .back-to-home i {
+      font-size: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>欢迎来到我的家乡——平遥古城</h1>
+</header>
+
+<main>
+  <div class="content-card">
+    <div class="card-content">
+      <h2><i class="fas fa-utensils"></i> 平遥美食</h2>
+      <p>平遥有众多著名美食，如平遥牛肉、碗秃、手工挂面、红烧兔肉等。每一道美食都承载着深厚的文化底蕴。</p>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <div class="card-content">
+      <h2><i class="fas fa-mountain"></i> 平遥风景</h2>
+      <p>平遥古城墙、日升昌票号、镇国寺双塔、城隍庙等是平遥古城的著名景点。古城内的每一处建筑都诉说着悠久的历史。</p>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <div class="card-content">
+      <h2><i class="fas fa-book"></i> 平遥文化</h2>
+      <p>平遥是中国保存最为完整的古代县城，是一座具有2700多年历史的文化古城，1997年被联合国教科文组织列入《世界文化遗产名录》。</p>
+    </div>
+  </div>
+</main>
+
+<section class="map-section">
+  <h2>地图定位</h2>
+  <div class="map-buttons">
+    <button class="map-button" onclick="showLocation()"><i class="fas fa-map-marker-alt"></i> 平遥古城</button>
+  </div>
+  <div id="map" class="map-container"></div>
+</section>
+
+<footer>
+  <p>© 2024 我的家乡——平遥古城 | 设计者：侯生润</p>
+</footer>
+
+<script>
+  // 简化后的地图代码
+  let map = new AMap.Map("map", {
+    zoom: 15,
+    center: [112.175577, 37.201668], // 平遥古城的经纬度
+  });
+
+  // 创建并添加标记
+  const marker = new AMap.Marker({
+    position: [112.175577, 37.201668],
+    title: "平遥古城",
+  });
+  map.add(marker);
+
+  // 定位函数
+  function showLocation() {
+    map.setCenter([112.175577, 37.201668]);
+  }
+</script>
+
+<!-- 添加返回主页按钮 -->
+<a href="index.html" class="back-to-home" title="返回主页">
+  <i class="fas fa-home"></i>
+</a>
+</body>
+</html>

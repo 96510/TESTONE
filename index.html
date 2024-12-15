@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>个人主页</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px; /* 添加四周留白 */
+    }
+    .navbar {
+      display: flex;
+      background-color: #333;
+      overflow: hidden;
+    }
+    .navbar a {
+      padding: 14px 20px;
+      display: block;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+    }
+    .navbar a:hover {
+      background-color: #575757;
+    }
+    .content {
+      padding: 20px;
+    }
+    .tabcontent {
+      display: none;
+    }
+    .tabcontent.active {
+      display: block;
+    }
+    .form-container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      margin: auto;
+    }
+    .form-container h2 {
+      margin-top: 0;
+    }
+    .form-container label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .form-container input, .form-container textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .form-container input[type="submit"] {
+      background-color: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .form-container input[type="submit"]:hover {
+      background-color: #575757;
+    }
+    .profile {
+      display: flex;
+      align-items: center; /* 垂直居中 */
+      margin-bottom: 20px;
+      background-color: #ffffff; /* 添加背景颜色 */
+      padding: 20px; /* 添加内边距 */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+      border-radius: 8px; /* 圆角边框 */
+    }
+    .profile img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-right: 20px; /* 图片与文本之间的间距 */
+    }
+    .profile h3 {
+      margin: 10px 0 5px;
+    }
+    .profile p {
+      margin: 0;
+    }
+    /* 修改立方体容器样式 */
+    .cube-container {
+      width: 200px;
+      height: 200px;
+      position: absolute;
+      perspective: 1000px;
+      animation: move-diagonal 8s infinite linear;
+      transform-style: preserve-3d;
+    }
+    
+    .cube {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: rotate 8s infinite linear;
+    }
+    
+    .cube div {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background-image: url('pygc.png');
+      background-size: cover;
+      background-position: center;
+      border: 2px solid white;
+    }
+    
+    /* 恢复六个面的变换 */
+    .front { transform: translateZ(100px); }
+    .back { transform: translateZ(-100px) rotateY(180deg); }
+    .right { transform: rotateY(90deg) translateZ(100px); }
+    .left { transform: rotateY(-90deg) translateZ(100px); }
+    .top { transform: rotateX(90deg) translateZ(100px); }
+    .bottom { transform: rotateX(-90deg) translateZ(100px); }
+    
+    /* 修改对角线移动动画 */
+    @keyframes move-diagonal {
+      0% {
+        left: 0;
+        top: 0;
+      }
+      50% {
+        left: calc(100% - 200px);
+        top: calc(100% - 200px);
+      }
+      100% {
+        left: 0;
+        top: 0;
+      }
+    }
+    
+    /* 旋转动画 */
+    @keyframes rotate {
+      0% { transform: rotateX(0) rotateY(0); }
+      100% { transform: rotateX(360deg) rotateY(360deg); }
+    }
+  </style>
+</head>
+<body>
+<div class="profile">
+  <img src="touxiang.png" alt="头像">
+  <div>
+    <h3>侯生润</h3>
+    <p>班级：软件工程212002</p>
+    <p>学号：202120040207</p>
+  </div>
+</div>
+<div class="navbar">
+  <a href="#" onclick="openTab(event, 'about')">我的信息</a>
+  <a href="#" onclick="openTab(event, 'music')">我的音乐</a>
+  <a href="#" onclick="openTab(event, 'pictures')">调查问卷</a>
+  <a href="#" onclick="openTab(event, 'hometown')">我的家乡</a>
+</div>
+
+<div id="about" class="tabcontent active">
+  <h2>我的信息</h2>
+  <p>web前端课程实验一</p>
+  <p>软件工程212002班侯生润</p>
+  <p>我的主页编写</p>
+</div>
+
+<div id="music" class="tabcontent">
+  <h2>我的音乐</h2>
+  <h3>歌曲1：他不懂</h3>
+  <audio controls>
+    <source src="他不懂.mp3" type="audio/mpeg">
+    您的浏览器不支持音频元素。
+  </audio>
+  <h3>歌曲2：tabudong</h3>
+  <audio controls>
+    <source src="他不懂.mp3" type="audio/mpeg">
+    您的浏览器不支持音频元素。
+  </audio>
+</div>
+
+<div id="pictures" class="tabcontent">
+  <h2>关于大学生日常饮食习惯调查</h2>
+  <img src="back.png" style="width:100%; max-width:600px;">
+  <br>
+  <p><a href="wj.html" style="color: #007bff; text-decoration: none; font-weight: bold; padding: 2px 5px; background-color: #e9f5ff; border-radius: 4px; transition: all 0.3s ease;">点此填写调查问卷</a></p>
+
+</div>
+
+<div id="hometown" class="tabcontent">
+  <h2>我的家乡</h2>
+  <div class="form-container" style="position: relative; min-height: 400px; overflow: hidden;">
+    <p>我的家乡在山西（<a href="hometown.html" style="color: #007bff; text-decoration: none; font-weight: bold; padding: 2px 5px; background-color: #e9f5ff; border-radius: 4px; transition: all 0.3s ease;">点此查看更多</a>）</p>
+    
+    <!-- 修改后的立方体 -->
+    <div class="cube-container">
+      <div class="cube">
+        <div class="front"></div>
+        <div class="back"></div>
+        <div class="right"></div>
+        <div class="left"></div>
+        <div class="top"></div>
+        <div class="bottom"></div>
+      </div>
+    </div>
+    
+    <p>家乡特色：</p>
+    <ul>
+      <li>地理位置：山西省晋中市</li>
+      <li>著名景点：平遥古城、双林寺</li>
+      <li>特色美食：平遥碗秃、平遥牛肉</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].classList.remove("active");
+    }
+    tablinks = document.getElementsByClassName("navbar")[0].getElementsByTagName("a");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).classList.add("active");
+    evt.currentTarget.className += " active";
+  }
+</script>
+</body>
+</html>

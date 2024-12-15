@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>大学生日常饮食习惯调查</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    h2 {
+      text-align: center;
+    }
+    form {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    label {
+      display: block;
+      margin: 10px 0;
+    }
+    input[type="text"], input[type="tel"], input[type="email"] {
+      width: calc(100% - 22px);
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #007BFF;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button[type="reset"] {
+      background-color: #6c757d;
+    }
+    progress {
+      width: 100%;
+      height: 20px;
+    }
+  </style>
+  <script>
+    function validateForm() {
+      const email = document.forms["surveyForm"]["mail"].value;
+      const phone = document.forms["surveyForm"]["tel"].value;
+      const name = document.forms["surveyForm"]["name"].value;
+      
+      const q3Checked = document.querySelectorAll('input[name="q3"]:checked').length > 0;
+      const q4Checked = document.querySelectorAll('input[name="q4"]:checked').length > 0;
+
+      if (!validateEmail(email)) {
+        alert("请输入有效的邮箱地址。");
+        return false;
+      }
+      if (!validatePhone(phone)) {
+        alert("请输入有效的手机号码。");
+        return false;
+      }
+      if (!q3Checked) {
+        alert("请至少选择一种饮食方式。");
+        return false;
+      }
+      if (!q4Checked) {
+        alert("请至少选择一种喜欢的餐饮类型。");
+        return false;
+      }
+
+      return true;
+    }
+
+    function validateEmail(email) {
+      var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(String(email).toLowerCase());
+    }
+
+    function validatePhone(phone) {
+      var phoneRegex = /^\d{10,15}$/;
+      return phoneRegex.test(phone);
+    }
+  </script>
+</head>
+<body>
+<div class="container">
+  <h2>大学生日常饮食习惯调查</h2>
+  <hr/>
+  <form id="surveyForm" action="success.html" method="get" onsubmit="return validateForm();">
+    <ol>
+      <li>您的年级是？</li>
+      <label><input type="radio" name="grade" value="大一" required> 大一</label>
+      <label><input type="radio" name="grade" value="大二" required> 大二</label>
+      <label><input type="radio" name="grade" value="大三" required> 大三</label>
+      <label><input type="radio" name="grade" value="大四" required> 大四</label>
+      <br>
+      <li>您平时通过哪些方式进行饮食？（可多选）</li>
+      <label><input type="checkbox" name="q3"> A线下店</label>
+      <label><input type="checkbox" name="q3"> B外卖购买</label>
+      <label><input type="checkbox" name="q3"> C朋友带饭</label>
+      <label><input type="checkbox" name="q3"> D其他</label> <br>
+      <li>每天用于吃饭的时间</li>
+      <select>
+        <option value="1h以下">1h以下</option>
+        <option value="1h-5h">1h-2h</option>
+        <option value="5h-10h">2h-5h</option>
+        <option value="大于10h">大于5h</option>
+      </select> <br>
+      <li>您喜欢吃哪一类的餐饮（）（可多选）</li>
+      <label><input type="checkbox" name="q4"> A火锅</label><br>
+      <label><input type="checkbox" name="q4"> B烧烤</label><br>
+      <label><input type="checkbox" name="q4"> C盖饭</label><br>
+      <label><input type="checkbox" name="q4"> D面条</label><br>
+      <label><input type="checkbox" name="q4"> E其他</label><br>
+      <li>您是否纠结过午餐需要吃什么（）</li>
+      <label><input type="radio" name="q5" value="是，并且认真的想过" required> 是，并且认真的想过</label>
+      <label><input type="radio" name="q5" value="有过一些考虑" required> 有过一些考虑</label>
+      <label><input type="radio" name="q5" value="没想过" required> 没想过</label> <br>
+      <li>您是否经常关注食品安全问题（）</li>
+      <label><input type="radio" name="q6" value="每天都关注" required> 每天都关注</label>
+      <label><input type="radio" name="q6" value="经常关注" required> 经常关注</label>
+      <label><input type="radio" name="q6" value="偶尔关注" required> 偶尔关注</label>
+      <label><input type="radio" name="q6" value="不关注" required> 不关注</label> <br>
+    </ol>
+    <label>您的姓名<input type="text" name="name" required></label>
+    <label>联系电话<input type="tel" name="tel" required></label>
+    <label>您的邮箱<input type="email" name="mail" required></label> <br>
+    <progress id="progressBar" value="0" max="100"></progress> <br>
+    <button type="submit">提交问卷</button>
+    <button type="reset">刷新</button>
+  </form>
+</div>
+</body>
+</html>
